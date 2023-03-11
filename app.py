@@ -1,13 +1,12 @@
 import gradio as gr
 import re
-from openbb_terminal.sdk import openbb
+from openbb_terminal.forecast.whisper_model import transcribe_and_summarize
 
 def get_video_id(url):
     video_id = re.findall(r"v=([-\w]{11})", url)[0]
     # make folder to store output files
-    os.makedirs(video_id, exist_ok=True)
     # extract video ID from URL using regular expression
-    openbb.forecast.whisper(video=url, output_dir=video_id)
+    transcribe_and_summarize(video=url, output_dir=video_id)
     # return files from video_id folder
     # find file with video_id/*_summary.txt
     summary_file = glob.glob(f"{video_id}/*_summary.txt")[0]
