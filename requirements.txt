@@ -1,2 +1,3 @@
 gradio
 openbb
+openbbterminal[forecast]
