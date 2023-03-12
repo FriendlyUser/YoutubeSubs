@@ -2,3 +2,4 @@ gradio
 openbb
 openbb[prediction]
 whisper
+yt_dlp
