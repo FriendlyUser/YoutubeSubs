@@ -20,9 +20,10 @@ def get_video_id(url):
     else:
         return "Please enter a YouTube URL"
     sys.stdin = old_stdin
-    summary_file = glob.glob(f"{video_id}/*_summary.txt")[0]
+    print(f"Video ID: {video_id}")
+    summary_file = glob.glob(f"-{video_id}/*_summary.txt")[0]
     # file .srt file
-    subtitle_file = glob.glob(f"{video_id}/*.srt")[0] or glob.glob(f"{video_id}/*.vtt")[0]
+    subtitle_file = glob.glob(f"-{video_id}/*.srt")[0] or glob.glob(f"{video_id}/*.vtt")[0]
     return summary_file, subtitle_file
 
 input_text = gr.inputs.Textbox(label="Enter a YouTube URL")
