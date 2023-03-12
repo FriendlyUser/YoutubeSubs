@@ -12,12 +12,14 @@ def get_video_id(url):
     old_stdin = sys.stdin
     if not sys.stdin.isatty():
         sys.stdin = StringIO('y')
+        sys.stdin = StringIO('y')
+        sys.stdin = StringIO('y')
+        sys.stdin = StringIO('y')
+        sys.stdin = StringIO('y')
         print("work around for gradio")
         transcribe_and_summarize(video=url, output_dir=video_id)
     else:
-        sys.stdin = StringIO('y')
-        print("guessing its not interactive")
-        transcribe_and_summarize(video=url, output_dir=video_id)
+        return "Please enter a YouTube URL"
     sys.stdin = old_stdin
     summary_file = glob.glob(f"{video_id}/*_summary.txt")[0]
     # file .srt file
