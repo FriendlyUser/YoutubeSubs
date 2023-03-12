@@ -11,11 +11,11 @@ def get_video_id(url):
     video_id = re.findall(r"v=([-\w]{11})", url)[0]
     old_stdin = sys.stdin
     if not sys.stdin.isatty():
-        sys.stdin = StringIO('-y')
+        sys.stdin = StringIO('y')
         print("work around for gradio")
         transcribe_and_summarize(video=url, output_dir=video_id)
     else:
-        sys.stdin = StringIO('-y')
+        sys.stdin = StringIO('y')
         print("guessing its not interactive")
         transcribe_and_summarize(video=url, output_dir=video_id)
     sys.stdin = old_stdin
