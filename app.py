@@ -34,7 +34,7 @@ def get_video_id(url):
         # get latest file with .srt or .vtt
         subtitle_file = max(glob.glob(f"**/*.vtt"), key=os.path.getctime)
 
-    if subtitle_file = None:
+    if subtitle_file is None:
         try:
             subtitle_file = glob.glob(f"{video_id}/*.srt")[0]
         except Exception as e:
