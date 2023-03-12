@@ -11,3 +11,6 @@ license: openrail
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+
+
+Check it the article at https://dlcoder.medium.com/automating-youtube-video-summarization-with-python-and-openbb-26721957fc5
