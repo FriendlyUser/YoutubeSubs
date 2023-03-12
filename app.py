@@ -1,15 +1,21 @@
 import gradio as gr
 import re
+import sys
 import glob
 from openbb_terminal.forecast.whisper_model import transcribe_and_summarize
 
+
 def get_video_id(url):
+
     video_id = re.findall(r"v=([-\w]{11})", url)[0]
-    # make folder to store output files
-    # extract video ID from URL using regular expression
-    transcribe_and_summarize(video=url, output_dir=video_id)
-    # return files from video_id folder
-    # find file with video_id/*_summary.txt
+    if not sys.stdin.isatty():
+        sys.stdin = StringIO('-y')
+        print("work around for gradio")
+        transcribe_and_summarize(video=url, output_dir=video_id)
+    else:
+        sys.stdin = StringIO('-y')
+        print("guessing its not interactive")
+        transcribe_and_summarize(video=url, output_dir=video_id)
     summary_file = glob.glob(f"{video_id}/*_summary.txt")[0]
     # file .srt file
     subtitle_file = glob.glob(f"{video_id}/*.srt")[0] or glob.glob(f"{video_id}/*.vtt")[0]
