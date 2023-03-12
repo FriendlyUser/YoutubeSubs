@@ -1,5 +1,6 @@
 import gradio as gr
 import re
+import glob
 from openbb_terminal.forecast.whisper_model import transcribe_and_summarize
 
 def get_video_id(url):
