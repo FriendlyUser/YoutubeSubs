@@ -10,6 +10,8 @@ def get_video_id(url):
 
     video_id = re.findall(r"v=([-\w]{11})", url)[0]
     old_stdin = sys.stdin
+    # mkdir /home/user/.cache/whisper
+    os.makedirs(f"/home/user/.cache/whisper", exist_ok=True)
     if not sys.stdin.isatty():
         y_strings = "\n".join(["y", "y", "y", "y", "y"])
         sys.stdin = StringIO(y_strings)
