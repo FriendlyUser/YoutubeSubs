@@ -14,6 +14,7 @@ def get_video_id(url):
     # mkdir /home/user/.cache/whisper
     os.makedirs(f"/home/user/.cache/whisper", exist_ok=True)
     if not sys.stdin.isatty():
+        # seems I only need 3 y's to get past the prompt, but 5 is safer
         y_strings = "\n".join(["y", "y", "y", "y", "y"])
         sys.stdin = StringIO(y_strings)
         transcribe_and_summarize(video=url, output_dir=video_id)
@@ -39,7 +40,20 @@ def get_video_id(url):
             subtitle_file = glob.glob(f"{video_id}/*.srt")[0]
         except Exception as e:
             subtitle_file = max(glob.glob(f"**/*.srt"), key=os.path.getctime)
-    return summary_file, subtitle_file
+
+    # returns contents of summary file and subtitle file
+    try:
+        with open(summary_file, "r") as f:
+            summary_contents = f.read()
+    except Exception as e:
+        summary_contents = "No summary file found"
+
+    try:
+        with open(subtitle_file, "r") as f:
+            subtitle_contents = f.read()
+    except Exception as e:
+        subtitle_contents = "No subtitle file found"
+    return summary_contents, subtitle_contents
 
 input_text = gr.inputs.Textbox(label="Enter a YouTube URL")
 output_text = [gr.outputs.Textbox(label="Summary File"), gr.outputs.Textbox(label="Subtitle File")]
