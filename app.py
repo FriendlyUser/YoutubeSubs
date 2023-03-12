@@ -6,7 +6,6 @@ import os
 from io import StringIO
 from openbb_terminal.forecast.whisper_model import transcribe_and_summarize
 
-
 def get_video_id(url):
 
     video_id = re.findall(r"v=([\w]{11})", url)[0]
