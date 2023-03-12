@@ -9,7 +9,7 @@ from openbb_terminal.forecast.whisper_model import transcribe_and_summarize
 
 def get_video_id(url):
 
-    video_id = re.findall(r"v=([-\w]{11})", url)[0]
+    video_id = re.findall(r"v=([\w]{11})", url)[0]
     old_stdin = sys.stdin
     # mkdir /home/user/.cache/whisper
     os.makedirs(f"/home/user/.cache/whisper", exist_ok=True)
@@ -27,11 +27,18 @@ def get_video_id(url):
         # get latest file with *_summary.txt
         summary_file = max(glob.glob(f"**/*_summary.txt"), key=os.path.getctime)
     # file .srt file
+    subtitle_file = None
     try:
-        subtitle_file = glob.glob(f"{video_id}/*.srt")[0] or glob.glob(f"{video_id}/*.vtt")[0]
+        subtitle_file = glob.glob(f"{video_id}/*.vtt")[0]
     except Exception as e:
         # get latest file with .srt or .vtt
-        subtitle_file = max(glob.glob(f"**/*.srt"), key=os.path.getctime) or max(glob.glob(f"**/*.vtt"), key=os.path.getctime)
+        subtitle_file = max(glob.glob(f"**/*.vtt"), key=os.path.getctime)
+
+    if subtitle_file = None:
+        try:
+            subtitle_file = glob.glob(f"{video_id}/*.srt")[0]
+        except Exception as e:
+            subtitle_file = max(glob.glob(f"**/*.srt"), key=os.path.getctime)
     return summary_file, subtitle_file
 
 input_text = gr.inputs.Textbox(label="Enter a YouTube URL")
