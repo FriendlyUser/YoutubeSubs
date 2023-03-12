@@ -58,4 +58,4 @@ def get_video_id(url):
 input_text = gr.inputs.Textbox(label="Enter a YouTube URL")
 output_text = [gr.outputs.Textbox(label="Summary File"), gr.outputs.Textbox(label="Subtitle File")]
 
-gr.Interface(fn=get_video_id, inputs=input_text, outputs=output_text, title="YouTube Video ID Finder").launch()
+gr.Interface(fn=get_video_id, inputs=input_text, outputs=output_text, title="YouTube Video Summarization").launch()
