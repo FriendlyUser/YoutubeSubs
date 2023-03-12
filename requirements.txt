@@ -1,5 +1,6 @@
 gradio
 openbb
-openbb[prediction]
+openbb[forecast]    
 whisper
 yt_dlp
+transformers
